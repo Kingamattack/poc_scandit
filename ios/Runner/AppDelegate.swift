@@ -3,36 +3,28 @@ import Flutter
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
-  override func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-  ) -> Bool {
+    
+  override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-    let batteryChannel = FlutterMethodChannel(name: "samples.flutter.dev/battery",
-                                              binaryMessenger: controller.binaryMessenger)
+    let batteryChannel = FlutterMethodChannel(name: "scandit/scan", binaryMessenger: controller.binaryMessenger)
+    
     batteryChannel.setMethodCallHandler({
       [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
-      // Note: this method is invoked on the UI thread.
-      // Handle battery messages.
-        guard call.method == "getBatteryLevel" else {
-          result(FlutterMethodNotImplemented)
-          return
-        }
-        self?.receiveBatteryLevel(result: result)
+        self?.window?.rootViewController = nil
+            
+        let viewToPush = ScanViewController()
+        
+        let navigationController = UINavigationController(rootViewController: controller)
+        
+        self?.window = UIWindow(frame: UIScreen.main.bounds)
+        self?.window?.makeKeyAndVisible()
+        self?.window.rootViewController = navigationController
+        navigationController.isNavigationBarHidden = true
+        navigationController.pushViewController(viewToPush, animated: true)
     })
     
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
-    private func receiveBatteryLevel(result: FlutterResult) {
-      let device = UIDevice.current
-      device.isBatteryMonitoringEnabled = true
-      if device.batteryState == UIDevice.BatteryState.unknown {
-        result(FlutterError(code: "UNAVAILABLE",
-                            message: "Battery info unavailable",
-                            details: nil))
-      } else {
-        result(Int(device.batteryLevel * 100))
-      }
-    }
 }

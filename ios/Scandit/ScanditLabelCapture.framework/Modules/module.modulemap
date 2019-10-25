@@ -1,0 +1,10 @@
+
+framework module ScanditLabelCapture [extern_c] {
+    umbrella header "ScanditLabelCapture.h"
+
+    export *
+    module * {
+        export *
+    }
+}
+

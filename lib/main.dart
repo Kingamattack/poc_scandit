@@ -7,11 +7,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Scandit Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Scandit Demo Home Page'),
     );
   }
 }
@@ -25,28 +25,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static const platform = const MethodChannel('samples.flutter.dev/battery');
-  int _counter = 0;
-  String _batteryLevel = 'Unknown battery level.';
+  static const platform = const MethodChannel('scandit/scan');
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  Future<void> _getBatteryLevel() async {
-    String batteryLevel;
+  _openScandit() async {
     try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      await platform.invokeMethod('openScandit');
     } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
+      print(e.message);
     }
-
-    setState(() {
-      _batteryLevel = batteryLevel;
-    });
   }
 
   @override
@@ -56,23 +42,13 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_batteryLevel',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+        child: Text(
+          'Scandit SDK',
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _getBatteryLevel,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+        onPressed: _openScandit(),
+        child: Icon(Icons.camera),
       ),
     );
   }
