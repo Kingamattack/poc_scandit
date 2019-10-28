@@ -19,3 +19,4 @@ samples, guidance on mobile development, and a full API reference.
 - https://flutter.dev/docs/development/platform-integration/platform-channels#step-4b-add-an-ios-platform-specific-implementation-using-swift
 - https://medium.com/@Chetan/flutter-communicate-with-android-activity-or-ios-viewcontroller-through-method-channel-c11704429cd0
 - https://github.com/Scandit/datacapture-ios-samples
+- https://github.com/Scandit/datacapture-android-samples
