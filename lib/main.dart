@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = const MethodChannel('scandit/scan');
 
-  _openScandit() async {
+  Future _openScandit() async {
     try {
       await platform.invokeMethod('openScandit');
     } on PlatformException catch (e) {
@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _openScandit(),
+        onPressed: _openScandit,
         child: Icon(Icons.camera),
       ),
     );
