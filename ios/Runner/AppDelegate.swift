@@ -7,9 +7,9 @@ import Flutter
   override func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-    let batteryChannel = FlutterMethodChannel(name: "scandit/scan", binaryMessenger: controller.binaryMessenger)
+    let scanChannel = FlutterMethodChannel(name: "scandit/scan", binaryMessenger: controller.binaryMessenger)
     
-    batteryChannel.setMethodCallHandler({
+    scanChannel.setMethodCallHandler({
       [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
         self?.window?.rootViewController = nil
             
