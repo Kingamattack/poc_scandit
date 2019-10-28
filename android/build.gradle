@@ -2,7 +2,12 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven { url 'https://scandit.bintray.com/DataCapture' }
+        maven {
+            url 'https://scandit.bintray.com/DataCapture'
+        }
+        flatDir {
+            dirs 'libs'
+        }
     }
 
     dependencies {
@@ -14,7 +19,12 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url 'https://scandit.bintray.com/DataCapture' }
+        maven {
+            url 'https://scandit.bintray.com/DataCapture'
+        }
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 
