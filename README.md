@@ -1,6 +1,7 @@
 # poc_scandit
 
 POC to test integration of Scandit SDK in a Flutter app using Platform Channels
+https://www.scandit.com/developers/
 
 ## Getting Started
 
